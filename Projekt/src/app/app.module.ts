@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { UserService } from './shared/user.service';
@@ -12,8 +13,9 @@ import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { ReactiveFormsModule} from '@angular/forms' 
+import { ReactiveFormsModule} from '@angular/forms' ;
 import { appRoutes } from './routes';
+
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { appRoutes } from './routes';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DragDropModule,
     ToastrModule.forRoot({
      positionClass: 'toast-top-center'
     }),
