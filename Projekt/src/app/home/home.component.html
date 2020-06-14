@@ -1,25 +1,84 @@
-<nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">
-        <i class="material-icons">games</i>Bandido Game App</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a (click)="Logout()">Logout</a>
-        </li>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div id="window">
+  <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li class="navbarButtons">
+            <a (click)="startNewGame()">Nowa gra</a>
+          </li>
+          <li class="navbarButtons">
+            <a id="undo" (click)="undoMove()">Cofnij</a>
+          </li>
+          <li class="navbarButtons">
+            <a (click)="ranking()">Ranking</a>
+          </li>
+          <li class="navbarButtons">
+            <a (click)="help()">Pomoc</a>
+          </li>
+        </ul>
+        <a href="#" class="brand-logo center">
+          <i class="material-icons">games</i>Bandido Game App</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="navbarButtons">
+            <a (click)="Logout()">Wyloguj</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  <div>
+    <!--div class="row" >
+      <div class="stack">
+        <div class="stack2" *ngFor="let card of cardsArray">
+          <div [draggable]="true" class="box" (dragstart)="onDragStart($event)">
+              <img  [src]="card" id={{card}} class="next_img"> 
+              <button (click)="Rotate(card)" class="rotate" id="rotate{{card}}"><i class="fa fa-rotate-right fa-xs"></i></button>
+          </div>
+        </div>
+      </div>
+      <img [src]="url" class="start_img"> <br/> 
+    div>-->
+
+    <div class="cardsOnHand">
+      <div *ngFor="let card of cardsArray">
+        <div [draggable]="true" class="box" id="div{{card}}" (dragstart)="onDragStart($event)">
+          <img  src="{{card}}" id={{card}} class="next_img">
+          <button (click)="Rotate(card)" class="rotate" id="rotate{{card}}"><i class="fa fa-rotate-right fa-xs"></i></button>
+        </div>
+      </div>
+      <button (click)="swapCardsOnHand()" id="swapCards" [disabled]="1>leftCards">Wymień karty</button>
+      <div title="Liczba kart: {{leftCards}}">
+        <img id="stack" class="stackOfCards" src="../../assets/cards/reverse.png">
+      </div>
+    </div>
+
+    <div class="imagePuzzle">
+      <ul class="puzzle" dropzone="true">
+        <li *ngFor="let i of board" id="{{i}}" class="boxList" (dragenter)="Dragenter($event)" 
+        (dragleave)="DragLeave($event)" (drop)="onDrop($event)" (dragover)="allowDrop($event)"></li>
       </ul>
     </div>
-  </nav>
-
-
-  <div cdkDropImage class="row" >
-    <div class="stack">
-    <div class="stack2" *ngFor="let card of cardsArray">
-      <img cdkDrag [src]="card" class="next_img"> <br/>
-   </div>
   </div>
-    <!-- <button (click)="onClickMe()">Koniec ruchu</button>
-    <img cdkDrag [src]="cardUrl" class="next_img"> <br/> -->
 
-    <img [src]="url" class="start_img"> <br/>
-    
+  <div class="gameEnd" id="gameOver">
+    <h1>Game over</h1>
+    <div class="statistics">
+      <h5>Liczba ruchów: {{numberOfMoves}}</h5>
+    </div>
+    <div class="buttons">
+      <button class="gameOverbutton" id="return" (click)="backToGame()">Powrót</button>
+      <button class="gameOverbutton" id="newGame" (click)="startNewGame()">Nowa gra</button>
+    </div>
   </div>
+
+  <div class="gameEnd" id="gameWin">
+    <h1>Wygrana!!!</h1>
+    <div class="statistics">
+      <h5>Liczba ruchów: {{numberOfMoves}}</h5>
+    </div>
+    <div class="buttons">
+      <button class="gameWinbutton" id="return" (click)="backToGame()">Powrót</button>
+      <button class="gameWinbutton" id="newGame" (click)="startNewGame()">Nowa gra</button>
+    </div>
+  </div>
+</div> 
