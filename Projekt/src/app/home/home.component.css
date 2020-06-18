@@ -1,160 +1,121 @@
-/*.start_img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20%;
-    width: 120px;
-    height: 60px;
-  }
-
-.row {
-    padding: 1%;
-}*/
-
-.next_img {
-    position: absolute;
-    width: 120px;
-    height: 60px;
-    transform: rotate(0deg);
-    margin-top:50px;
-}
-
-.navbarButtons {
-    width: fit-content;
-    height: inherit;
-}
-
-/*.stack {
-    width: 120px;
-    height: 60px;
-    float: left;
-}
-
-.stack2 {
-    width: 0px;
-    height: 0px;
-}*/
-
-.rotate {
-    margin-top:22px;
-}
-
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 #window {
     width: 100%;
     height: 100%;
     position: absolute;
+    background : #5fbeb7; 
 }
 
-.imagePuzzle {
-    color: white;
-    position: absolute;
-    left: 200px;
-    top: 70px;
-    float: right;
-    margin: 0px;
-    justify-content: center;
-}
-
-.puzzle {
-    float: center;
-    width: 1200px;
-    height: 900px;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    flex-wrap: wrap;
-    box-sizing: initial;
-    position: absolute;
-    top: 0px;
-    border: 1px solid #69c5b1;
-}
-
-li {
-    width: 60px;
-    height: 60px;
-    /*border: 1px solid blue;*/
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.box {
-    display: inline-block;
-    padding: 0;
-    margin: 20px;
-    margin-bottom: 60px;
-    display: none;
-}
-
-.boxList {
-    display: inline-block;
-    padding: 0;
-    margin: 0px;
-}
-
-.cardsOnHand{
-    width: 200px;
-    position: absolute;
-    left: 20px;
-}
-
-#swapCards {
-    margin: 20px;
-    margin-bottom: 0px;
-    margin-top: 60px;
-}
-
-.stackOfCards {
-    width: 120px;
-    height: 60px;
-    margin: 20px;
-    margin-bottom: 0px;
-    background-color: 	#ba5669;
-    word-wrap: break-word;
-    box-shadow:  0 0.5em 0 -0.25em #8cccc4, 0 1em 0 -0.5em #7cc4b4;
+#allthethings {
+    width:0px;
+    height:0px;
+    
+    border-left: 300px solid transparent;
+    border-right:300px solid transparent;
+    border-top: 300px solid transparent;
+    border-radius: px;
+    position:relative;
+    margin:auto;
+    top:200px;
+    left:2px;
   }
 
-.gameEnd {
-    width:50%;
-    position: relative;
-    left:25%;
-    top:10%;
-    opacity: 90%;
-    display: none;
-}
+  button {
+      margin: 20px;
+  }
 
-#gameWin {
-    background-color: #2da59b;
-}
+  #single {
+    position:relative;
+    bottom:330px;
+    right:300px;
+    height:50px;
+    width:600px;
+    background:#006680;
+    text-align:center;
+    font-size:30px;
+   background-size: 1px 300%;
+   -webkit-transition:0.5s;
+    transition:0.5s;
+    color:white;
+    font-family:shadows into light;
+    
+    cursor:pointer;
+  }
 
-#gameOver {
-    background-color: #972b3f;
-}
-
-h1, h5 {
-    text-align: center;
-    padding-top: 20px;
-}
-
-.gameOverbutton {
-    margin:40px;
-    background-color: #972b3f;
-    border: none;
+  #multiplayer {
+    height:50px;
+    width:600px;
+    background:#006680;
+    position:relative;
+    bottom:345px;
+    right:300px;
+    text-align:center;
+    font-size:30px;
+    font-family:shadows into light;
+    color:white;
+     -webkit-transition:0.5s;
+    transition:0.5s;
+    cursor:pointer;
+  }
+  
+  #options {
+    height:50px;
+    width:600px;
+    background:#006680;
+    position:relative;
+    bottom:360px;
+    right:300px;
+    font-size:30px;
+    text-align:center;
+    font-family:shadows into light;
     color: white;
-    text-align: center;
-    font-size: 16px;
-}
+     -webkit-transition:0.5s;
+    transition:0.5s;
+    cursor:pointer;
+  }
+  
+  #credits {
+    height:50px;
+    width:600px;
+    position:relative;
+    background:#006680;
+    bottom:375px;
+    font-size:30px;
+    right:300px;
+    text-align:center;
+    font-family:shadows into light;
+    color:white;
+     -webkit-transition:0.5s;
+    transition:0.5s;
+    cursor:pointer;
+    
+  }
 
-.gameWinbutton {
-    margin:40px;
-    background-color: #2da59b;
-    border: none;
-    color: white;
-    text-align: center;
-    font-size: 16px;
-}
+  #single:hover {
+    background:#b95868;
+    color:white;
+  -webkit-transform:rotate(-1deg);
+    transform:rotate(-2deg); 
+  }
 
-#newGame {
-    float: right;
-}
+  #multiplayer:hover {
+    background:#b95868;
+    color:white;
+     
+    -webkit-transform:rotate(-2deg);
+    transform:rotate(-2deg);
+  }
+  
+  #credits:hover {
+    background:#b95868;
+    color:white;
+    -webkit-transform:rotate(-2deg);
+    transform:rotate(-2deg);
+  }
+  
+  #options:hover {
+    background:#b95868;
+    color:white;
+    -webkit-transform:rotate(-2deg);
+    transform:rotate(-2deg);
+  }

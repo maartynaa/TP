@@ -19,7 +19,18 @@ export class CardService {
 
   constructor(private http: HttpClient) {
     CardService.instance = this;
+    this.loadCardDescriptions();
+   }
 
+   onInit() {
+    this.boardDescription = [];
+    this.cardsOrientation = [];
+    this.openTunnels = [];
+    this.lastOpenedTunnels = 0;
+    this.lastClosedTunnels = [];
+    for(let i=0; i<33; i++) {
+      this.cardsOrientation.push(0);
+    }
     for(let i=0; i<300; i++) {
       this.boardDescription.push(-1);
     }
@@ -32,9 +43,12 @@ export class CardService {
     this.openTunnels.push(148);
     this.openTunnels.push(151);
 
-    this.loadCardDescriptions();
+    
    }
 
+   /**
+   * Load cards descriptions and set board description of init elements
+   */
   loadCardDescriptions() {
     for (let i=0; i<33; i++){
       this.http.get("assets/cards/" + i.toString() + ".txt", {responseType: "text"}).subscribe(data => {
@@ -62,32 +76,32 @@ export class CardService {
    * @param index card index
    * @returns Id of neighboring element if card can be dropped, -1 otherwise
    */
-  checkCardCanBeDropped(cardsOrientationArray, targetId, index): number { 
-    this.cardsOrientation = cardsOrientationArray;
+  checkCardCanBeDropped(orientation, targetId, index): number { 
+    this.cardsOrientation[index-1] = orientation;
     if (this.boardDescription[targetId] == -1) {
       targetId = parseInt (targetId, 10);
-      if (this.cardsOrientation[index-1] == 0 && targetId % this.boardWidth != 19) { 
+      if (orientation == 0 && targetId % this.boardWidth != 19) { 
         if (this.boardDescription[targetId+1] == -1) {
           if (this.cardFitToNeighbour(index, targetId, targetId+1)) { 
             return targetId+1;
           }
         }
       }
-      else if (this.cardsOrientation[index-1] == 90 && targetId < 280) {
+      else if (orientation == 90 && targetId < 280) {
         if (this.boardDescription[targetId+this.boardWidth] == -1) {
           if (this.cardFitToNeighbour(index, targetId, targetId+this.boardWidth)) { 
             return targetId+this.boardWidth;
           }
         }
       }
-      else if (this.cardsOrientation[index-1] == 180 && targetId % this.boardWidth != 0) {
+      else if (orientation == 180 && targetId % this.boardWidth != 0) {
         if (this.boardDescription[targetId-1] == -1) {
           if (this.cardFitToNeighbour(index, targetId, targetId-1)) { 
             return targetId-1;
           }
         }
       }
-      else if (this.cardsOrientation[index-1] == 270 && targetId >= 20) {
+      else if (orientation == 270 && targetId >= 20) {
         if (this.boardDescription[targetId-this.boardWidth] == -1) {
           if (this.cardFitToNeighbour(index, targetId, targetId-this.boardWidth)) { 
             return targetId-this.boardWidth;
@@ -109,9 +123,6 @@ export class CardService {
     let neighbours = this.checkCardFitToNeighbours(targetId, this.getHalfCardDescription(cardIndex));
     if (neighbours > -1) {
       let neighbours2 = this.checkCardFitToNeighbours(nextTargetId, this.getHalfCardDescription(cardIndex+1000));
-      //console.log(this.getHalfCardDescription(cardIndex+1000));
-      //console.log(neighbours);
-      //console.log(neighbours2);
       if (neighbours2 > -1 && neighbours+neighbours2>0) {
         return true;
       }
@@ -135,8 +146,6 @@ export class CardService {
     }
     else if (this.boardDescription[targetId-this.boardWidth] != -1) {
       let neighbourDesc = this.getHalfCardDescription(this.boardDescription[targetId-this.boardWidth]);
-      //console.log(halfCardDesc);
-      //console.log(neighbourDesc);
       if ((halfCardDesc[0] + neighbourDesc[2]) % 2 == 0) {
         neighboursChecked += 1;
         if (halfCardDesc[0] == 1) {
@@ -154,8 +163,6 @@ export class CardService {
     }
     else if (this.boardDescription[targetId+this.boardWidth] != -1) {
       let neighbourDesc = this.getHalfCardDescription(this.boardDescription[targetId+this.boardWidth]);
-      //console.log(halfCardDesc);
-      //console.log(neighbourDesc);
       if ((halfCardDesc[2] + neighbourDesc[0]) % 2 == 0) {
         neighboursChecked += 1;
         if (halfCardDesc[2] == 1) {
@@ -173,8 +180,6 @@ export class CardService {
     }
     else if (this.boardDescription[targetId-1] != -1) {
       let neighbourDesc = this.getHalfCardDescription(this.boardDescription[targetId-1]);
-      //console.log(halfCardDesc);
-      //console.log(neighbourDesc);
       if ((halfCardDesc[3] + neighbourDesc[1]) % 2 == 0) {
         neighboursChecked += 1;
         if (halfCardDesc[3] == 1) {
@@ -192,8 +197,6 @@ export class CardService {
     }
     else if (this.boardDescription[targetId+1] != -1) {
       let neighbourDesc = this.getHalfCardDescription(this.boardDescription[targetId+1]);
-      //console.log(halfCardDesc);
-      //console.log(neighbourDesc);
       if ((halfCardDesc[1] + neighbourDesc[3]) % 2 == 0) {
         neighboursChecked += 1;
         if (halfCardDesc[1] == 1) {
@@ -261,8 +264,12 @@ export class CardService {
    * @param index number of card
    * @param targetId board element Id on which card is dropped
    */
-  setOpenTunnels(index: number, targetId:number): Boolean {
-    if (index < 1000) {this.lastOpenedTunnels=0;}
+  setOpenTunnels(index: number, targetId:number, orientation:number): Boolean {
+    if (index < 1000) {
+      this.lastOpenedTunnels=0;
+      this.cardsOrientation[index-1] = orientation;
+    }
+    else {this.cardsOrientation[index-1001] = orientation;}
     this.lastClosedTunnels = [];
     if (this.openTunnels.indexOf(targetId)!=-1){
       this.lastClosedTunnels.push(targetId);
@@ -273,29 +280,37 @@ export class CardService {
     if (cardDesc[0] == 1) {
       if (targetId < this.boardWidth){return false;}
       else if (this.boardDescription[targetId - this.boardWidth] == -1) {
-        this.openTunnels.push(targetId - this.boardWidth);
-        this.lastOpenedTunnels++;
+        if (this.openTunnels.indexOf(targetId - this.boardWidth) == -1) {
+          this.openTunnels.push(targetId - this.boardWidth);
+          this.lastOpenedTunnels++;
+        }
       }
     }
     if (cardDesc[1] == 1) {
       if (targetId % this.boardWidth == 19){return false;}
       else if (this.boardDescription[targetId + 1] == -1) {
-        this.openTunnels.push(targetId + 1);
-        this.lastOpenedTunnels++;
+        if (this.openTunnels.indexOf(targetId + 1) == -1) {
+          this.openTunnels.push(targetId + 1);
+          this.lastOpenedTunnels++;
+        }
       }
     }
     if (cardDesc[2] == 1) {
       if (targetId >= 280){return false;}
       else if (this.boardDescription[targetId + this.boardWidth] == -1) {
-        this.openTunnels.push(targetId + this.boardWidth);
-        this.lastOpenedTunnels++;
+        if (this.openTunnels.indexOf(targetId + this.boardWidth) == -1) {
+          this.openTunnels.push(targetId + this.boardWidth);
+          this.lastOpenedTunnels++;
+        }
       }
     }
     if (cardDesc[3] == 1) {
       if (targetId % this.boardWidth == 0){return false;}
       else if (this.boardDescription[targetId - 1] == -1) {
-        this.openTunnels.push(targetId - 1);
-        this.lastOpenedTunnels++;
+        if (this.openTunnels.indexOf(targetId - 1) == -1) {
+          this.openTunnels.push(targetId - 1);
+          this.lastOpenedTunnels++;
+        }
       }
     }
     return true;
