@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div id="window">
+  <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li class="navbarButtons">
+            <a (click)="startNewGame()">Menu</a>
+          </li>
+          <li class="navbarButtons">
+            <a (click)="help()">Pomoc</a>
+          </li>
+        </ul>
+        <a href="#" class="brand-logo center">
+          <i class="material-icons">games</i>Bandido Game User: {{userClaims.username}}</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="navbarButtons">
+            <a (click)="Logout()">Wyloguj</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div>
+        <h2>RANKING</h2>
+
+        <table >
+            <tr>
+              <th>USER</th>
+              <th>SCORE</th>
+            </tr>
+            <tr *ngFor="let row of data">
+              <td>{{row.username}}</td>
+              <td>{{row.score}}</td>
+            </tr>
+          </table>
+    </div>
+
+
+ 
+
+
+</div> 

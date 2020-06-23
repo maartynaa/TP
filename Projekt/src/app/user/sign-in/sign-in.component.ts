@@ -11,7 +11,10 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
   isLoginError : boolean = false;
-  constructor(private formBuilder : FormBuilder, private userService : UserService,private router : Router) { }
+  userName : string;
+  constructor(private formBuilder : FormBuilder, private userService : UserService,private router : Router) { 
+    this.userName
+  }
 
   ngOnInit() {
   }
@@ -19,15 +22,17 @@ export class SignInComponent implements OnInit {
 
   OnSubmit(userName,password){
     const loginData = {
-      username: userName,
+      username : userName,
       password: password
 
     }
 
     this.userService.login(loginData).subscribe((data : any)=>{
      if(data.token){
+        this.userName = userName
         localStorage.setItem('token', data.token);
         this.router.navigate(['/home']);
+        
       }
       else {
         this.isLoginError = true;

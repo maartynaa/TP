@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {GameServerService} from "../shared/game-server.service";
+import { GameServerService } from "../shared/game-server.service";
+import { UserService } from "../shared/user.service";
 
 @Component({
   selector: 'app-home',
@@ -9,13 +10,15 @@ import {GameServerService} from "../shared/game-server.service";
 })
 
 export class HomeComponent implements OnInit {
+  userClaims : any
+  username : string
 
-  constructor(private router: Router, private gameServer: GameServerService) {
-   }
+  constructor(private router: Router, private gameServer: GameServerService, private userService : UserService) {
+    this.userClaims = this.userService.getUserClaims()
+  }
+   
 
-  ngOnInit() {
-    
-  } 
+  ngOnInit() { } 
 
   Logout() {
     localStorage.removeItem('userToken');
@@ -36,7 +39,7 @@ export class HomeComponent implements OnInit {
    * Display ranking
    */
   ranking() {
-
+    this.router.navigate(['/ranking']);
   }
 
   /**

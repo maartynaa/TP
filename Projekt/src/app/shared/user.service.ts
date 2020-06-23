@@ -7,6 +7,7 @@ import { User } from './user.model';
 @Injectable()
 export class UserService {
   readonly rootUrl = 'http://localhost/TP';
+  data : any
   constructor(private http: HttpClient) { }
 
   registerUser(user: User) {
@@ -22,7 +23,24 @@ export class UserService {
   }
 
   login(data) {
+    this.data = data
     return this.http.post(this.rootUrl + '/login.php', data);
+  }
+
+  saveScore(data){
+    return this.http.post(this.rootUrl + '/addScore.php', data);
+  }
+
+  private _url: string = "/assets/data/get.json";
+
+  getScore(){
+    // return this.http.get(this.rootUrl + '/getScore.php');
+    return this.http.get(this._url);
+  }
+
+
+  getUserClaims() {
+    return this.data
   }
 
 }

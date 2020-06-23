@@ -31,8 +31,10 @@ export class GameComponent implements OnInit {
   moveDone :Boolean;
   dataToSend = [];
   gameMode :number;
+  userClaims : any;
 
   constructor(private router: Router, private userService: UserService, private cardService: CardService, private gameServerService: GameServerService) {
+    this.userClaims = this.userService.getUserClaims()
    }
 
   ngOnInit() {
@@ -318,6 +320,21 @@ export class GameComponent implements OnInit {
     div.style.display = "block";
     this.lastPlaceDropCard = -1;
     this.opponentTurn = true;
+
+    const saveData = {
+      UserName : this.userClaims.username,
+      Score: this.numberOfMoves
+    }
+
+    this.userService.saveScore(saveData).subscribe((data: any) => {
+      if (data.Succeeded == true) {
+        console.log("Score was saved correctly")
+      }
+      if (data.Succeeded == false) {
+        console.log("Error")
+      }
+    });
+    
   }
 
   /**
@@ -326,6 +343,21 @@ export class GameComponent implements OnInit {
   gameWinDisplayWindow() {
     let div = document.getElementById("gameWin");
     div.style.display = "block";
+
+
+    const saveData = {
+      UserName : this.userClaims.username,
+      Score: this.numberOfMoves
+    }
+
+    this.userService.saveScore(saveData).subscribe((data: any) => {
+      if (data.Succeeded == true) {
+        console.log("Score was saved correctly")
+      }
+      if (data.Succeeded == false) {
+        console.log("Error")
+      }
+    });
   }
 
   /**
@@ -385,7 +417,7 @@ export class GameComponent implements OnInit {
    * Display ranking
    */
   ranking() {
-
+    this.router.navigate(['/ranking']);
   }
 
   /**

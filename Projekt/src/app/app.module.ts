@@ -16,6 +16,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { ReactiveFormsModule} from '@angular/forms' ;
 import { appRoutes } from './routes';
 import { GameComponent } from './game/game.component';
+import { RankingComponent } from './ranking/ranking.component';
 
 
 
@@ -26,7 +27,8 @@ import { GameComponent } from './game/game.component';
     UserComponent,
     SignInComponent,
     HomeComponent,
-    GameComponent
+    GameComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
