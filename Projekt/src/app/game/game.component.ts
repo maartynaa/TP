@@ -323,12 +323,15 @@ export class GameComponent implements OnInit {
 
     const saveData = {
       UserName : this.userClaims.username,
-      Score: this.numberOfMoves
+      Score: this.numberOfMoves,
+      Status: 'loss'
     }
 
     this.userService.saveScore(saveData).subscribe((data: any) => {
+      console.log(saveData)
       if (data.Succeeded == true) {
         console.log("Score was saved correctly")
+
       }
       if (data.Succeeded == false) {
         console.log("Error")
@@ -347,10 +350,12 @@ export class GameComponent implements OnInit {
 
     const saveData = {
       UserName : this.userClaims.username,
-      Score: this.numberOfMoves
+      Score: this.numberOfMoves - 5,
+      Status: 'win'
     }
 
     this.userService.saveScore(saveData).subscribe((data: any) => {
+      console.log(saveData)
       if (data.Succeeded == true) {
         console.log("Score was saved correctly")
       }

@@ -16,10 +16,11 @@ if(isset($postdata) && !empty($postdata)) {
 	
 	$username = mysqli_real_escape_string($conn, trim($request->UserName));
 	$score = mysqli_real_escape_string($conn, trim($request->Score));
+	$status = mysqli_real_escape_string($conn, trim($request->Status));
 
 	
-	$sql = "INSERT INTO `ranking`(`username`, `score`) 
-	VALUES ('{$username}','{$score}')";
+	$sql = "INSERT INTO `ranking`(`username`, `score`, `status`) 
+	VALUES ('{$username}','{$score}', '{$status}')";
 	
 	if(mysqli_query($conn, $sql)){
 		http_response_code(201);

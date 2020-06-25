@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Cze 2020, 18:44
+-- Czas generowania: 25 Cze 2020, 13:09
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.4.3
 
@@ -31,18 +31,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `ranking` (
   `id` int(11) NOT NULL,
   `username` text CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci NOT NULL,
-  `score` int(11) NOT NULL
+  `score` int(11) NOT NULL,
+  `status` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `ranking`
 --
 
-INSERT INTO `ranking` (`id`, `username`, `score`) VALUES
-(1, 'martyna', 100),
-(2, 'admin', 150),
-(3, 'martyna', 111),
-(4, 'martyna', 8);
+INSERT INTO `ranking` (`id`, `username`, `score`, `status`) VALUES
+(1, 'martyna', 100, 'loss'),
+(2, 'admin', 150, 'loss'),
+(3, 'martyna', 80, 'loss'),
+(4, 'martyna', 8, 'win'),
+(5, 'martyna', 9, 'win');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -62,7 +64,7 @@ ALTER TABLE `ranking`
 -- AUTO_INCREMENT dla tabeli `ranking`
 --
 ALTER TABLE `ranking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
