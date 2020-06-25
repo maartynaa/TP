@@ -34,8 +34,8 @@ export class UserService {
   private _url: string = "/assets/data/get.json";
 
   getScore(){
-    // return this.http.get(this.rootUrl + '/getScore.php');
-    return this.http.get(this._url);
+    return this.http.get(this.rootUrl + '/getScore.php');
+    // return this.http.get(this._url);
   }
 
 

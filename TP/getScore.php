@@ -10,31 +10,33 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 $postdata = file_get_contents("php://input");
 
-if(isset($postdata) && !empty($postdata)) {
-	$request = json_decode($postdata);
-	
-	echo "aaa";
-	echo json_encode(
-				array(
-					"message" => "Successful",
-										
-				));
-	
-	$sql = "SELECT * FROM `ranking`";
-	$result = mysqli_query($conn, $sql);
+$request = json_decode($postdata);
 
-	
-	if ($result ->num_rows > 0) {
-		echo "bbbbb";
-		echo json_encode(
-				array(
-					"message" => "Successful",
-										
-				));
-		http_response_code(200);
-	
-	}
-	
+if(isset($postdata) && !empty($postdata)) {
+	$username = $request->username;
+	$password = $request->password;
 }
+
+
+
+
+
+$result = mysqli_query($conn, "select * from ranking order by score")
+			or die("Failed to query database ".mysqli_error());
+			
+$json_array = array();
+
+while($row = mysqli_fetch_assoc($result)) {
+	
+	$json_array[] = $row;
+
+}
+
+echo json_encode($json_array);
+
+
+
+
+
 
 ?>
