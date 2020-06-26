@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
    * Display game help
    */
   help() {
-
+    this.router.navigate(['/help']);
   }
 
 

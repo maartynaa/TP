@@ -3,24 +3,18 @@ import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-ranking',
-  templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.css']
+  selector: 'app-help',
+  templateUrl: './help.component.html',
+  styleUrls: ['./help.component.css']
 })
-export class RankingComponent implements OnInit {
+export class HelpComponent implements OnInit {
   userClaims : any;
-  data : any;
 
-  constructor(private router: Router, private userService : UserService) { 
+  constructor(private router: Router, private userService: UserService) {
     this.userClaims = this.userService.getUserClaims()
-  
-  }
+   }
 
   ngOnInit(): void {
-    console.log("ranking")
-    this.userService.getScore().subscribe((data: any) => {
-      this.data = data      
-    });
   }
 
   Logout() {
@@ -33,8 +27,6 @@ export class RankingComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  help() {
-    this.router.navigate(['/help']);
-  }
+
 
 }

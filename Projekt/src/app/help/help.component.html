@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div id="window">
+  <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li class="navbarButtons">
+            <a (click)="startNewGame()">Menu</a>
+          </li>
+        </ul>
+        <a href="#" class="brand-logo center">
+          <i class="material-icons">games</i>Bandido Game User: {{userClaims.username}}</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="navbarButtons">
+            <a (click)="Logout()">Wyloguj</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class='info'>
+        <h2>HELP</h2>
+
+        <p>Informacje wstępne</p>
+        <ul>
+            <li>1. W grę Bandido można grać indywidualnie lub w zespole.</li>
+            <li>2. Gra zawiera 33 karty, które grecze ustawiają na planszy i jedną kartę specjalną - startową.</li>
+        </ul>
+
+        <p>Przebieg gry</p>
+        <ul>
+            <li>1. Zaczyna najmłodszy gracz.</li>
+            <li>2. W swojej kolejce umieść jedną ze swoich kart, tak aby łączyła się z jedną lub więcej kartami położonymi już na stole.</li>
+            <li>3. Karta, którą zagrywasz, musi idealnie pasować do tych już położonych na stole. </li>
+            <li>4. Jeśli nie możesz dołożyć żadnej karty, możesz w ramach ruchu wymienić dostępne karty.</li>
+            <li>5. Grajcie dalej, do momentu aż zablokujecie wszystkie tunele lub gdy stos dobierania się skończy.</li>
+            <li>6. Jeśli uda wam się zablokować wszystkie tunele, razem pokonaliście wirusa i wygraliści tę grę. Jeśli chociaż jeden tunel pozostanie otwarty po tym, gdy wszystkie karty zostały już umieszczone,
+                wirus ucieka, a wszyscy przegrywają.</li>
+        </ul>
+
+        <p>Punktacja</p>
+        <ul>
+            <li>1. Za każdy wykonany ruch (położenie karty lub wymianę kart) jest przydzielany 1 punkt.</li>
+            <li>2. Za wygraną jest przydzielane -5 punktów.</li>
+            <li>3. Za przegraną jest przydzielane +5 punktów.</li>
+            <li>4. Celem gry jest wygrnanie w jak najmniejszej liczbie ruchów.</li>
+        </ul>
+    </div>    

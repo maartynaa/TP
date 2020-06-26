@@ -323,7 +323,7 @@ export class GameComponent implements OnInit {
 
     const saveData = {
       UserName : this.userClaims.username,
-      Score: this.numberOfMoves,
+      Score: this.numberOfMoves + 5,
       Status: 'loss'
     }
 
@@ -429,7 +429,7 @@ export class GameComponent implements OnInit {
    * Display game help
    */
   help() {
-
+    this.router.navigate(['/help']);
   }
 
 

@@ -17,6 +17,7 @@ import { ReactiveFormsModule} from '@angular/forms' ;
 import { appRoutes } from './routes';
 import { GameComponent } from './game/game.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -28,7 +29,8 @@ import { RankingComponent } from './ranking/ranking.component';
     SignInComponent,
     HomeComponent,
     GameComponent,
-    RankingComponent
+    RankingComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
